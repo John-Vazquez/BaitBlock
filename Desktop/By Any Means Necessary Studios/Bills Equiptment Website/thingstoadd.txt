@@ -1,0 +1,6 @@
+List of Items that need to be updated before launch
+
+
+1. Updated services image
+
+2. Impliment all other pages.

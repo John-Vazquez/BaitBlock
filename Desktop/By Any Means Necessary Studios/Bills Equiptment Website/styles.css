@@ -1,0 +1,161 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('Main Images/BE Background.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    background-repeat: no-repeat;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(128, 128, 128, 0.4);
+    z-index: -1;
+}
+
+.logo { 
+    height: 110px; 
+    width: auto; 
+    margin-top: 10px;
+    margin-left: 30px;
+}
+
+header nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 50px;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    margin-left: 500px; 
+    margin-top: -95px; 
+}
+
+header nav ul li {
+    font-size: 22px;
+    margin-left: 30px;
+}
+
+header nav ul li a {
+    text-decoration: none;
+    color: #fff; 
+    position: relative;
+}
+
+header nav ul li a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px; /* Thickness of the underline */
+    background-color: white; /* Color of the underline */
+    transform: scaleX(0); /* Start with no underline (hidden) */
+    transform-origin: right; /* Start the animation from the right */
+    transition: transform 0.3s ease; /* Smooth animation */
+}
+
+header nav ul li a:hover::after {
+    transform: scaleX(1); /* Show the underline when hovered */
+    transform-origin: left; /* Animate the underline from left to right */
+}
+
+main.content{
+    padding: 50px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.8); /* Light background to stand out */
+    color: #000; 
+    margin-top: 20px; /* Space it nicely below the navbar */
+}
+
+#scroll-arrow {
+    margin-right:150px;
+    font-size: 90px;
+    color: #fff;
+    cursor: pointer;
+    text-align: right;
+    margin-top: -120px;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+
+.main-content h2 {
+    font-family: 'Montserrat', sans-serif;
+    margin-left: 40px;
+    margin-top: 220px;
+    font-size: 36px;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.main-content p {
+    margin-left:40px;
+    max-width: 600px; 
+    word-wrap: break-word;
+    color:white;
+    font-size: 15px;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 10px;
+}
+
+.secondary-content {
+    display: flex;
+    justify-content: space-around;
+    padding: 50px 20px;
+    background-color: #fff;
+    margin-top:100px;
+    flex-wrap:wrap;
+}
+
+.secondary-content-box {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    width: 30%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.secondary-content-box img {
+    width: 100%;
+    border-radius: 10px;
+    max-height: 300px;
+
+}
+
+.secondary-content-box h3 {
+    font-size: 24px;
+    margin: 20px 0 10px;
+}
+
+.secondary-content-box p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.secondary-content-box a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ffd700;
+    color: #000;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.secondary-content-box a:hover {
+    background-color: #ffc107;
+}
