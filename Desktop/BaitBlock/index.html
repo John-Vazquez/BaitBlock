@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Email System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">My Email System</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Inbox</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Sent</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Spam</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3">
+                <ul class="list-group">
+                    <li class="list-group-item active">Inbox</li>
+                    <li class="list-group-item">Sent</li>
+                    <li class="list-group-item">Spam</li>
+                    <li class="list-group-item">Trash</li>
+                </ul>
+            </div>
+            <!-- Email List -->
+            <div class="col-md-9">
+                <h4>Inbox</h4>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <input class="form-check-input me-2" type="checkbox" id="email1">
+                        <label for="email1" class="form-check-label">
+                            <strong>Subject:</strong> You have won a prize! <br>
+                            <strong>From:</strong> lottery@fakesite.com <br>
+                            Congratulations! Click the link to claim your reward...
+                        </label>
+                    </div>
+                </div>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <input class="form-check-input me-2" type="checkbox" id="email2">
+                        <label for="email2" class="form-check-label">
+                            <strong>Subject:</strong> Meeting Reminder <br>
+                            <strong>From:</strong> boss@company.com <br>
+                            Please confirm your availability for the team meeting at 10 AM tomorrow.
+                        </label>
+                    </div>
+                </div>
+                <!-- Action Button -->
+                <button class="btn btn-primary mt-3" onclick="checkForPhishing()">Check for Phishing</button>
+            </div>
+        </div>
+
+        <!-- Email Composition Form -->
+        <div class="row mt-5">
+            <div class="col-md-12">
+                <h4>Compose Email</h4>
+                <form id="composeEmailForm">
+                    <div class="mb-3">
+                        <label for="fromEmail" class="form-label">From:</label>
+                        <input type="email" class="form-control" id="fromEmail" placeholder="your.email@example.com">
+                    </div>
+                    <div class="mb-3">
+                        <label for="toEmail" class="form-label">To:</label>
+                        <input type="email" class="form-control" id="toEmail" placeholder="recipient@example.com">
+                    </div>
+                    <div class="mb-3">
+                        <label for="subject" class="form-label">Subject:</label>
+                        <input type="text" class="form-control" id="subject" placeholder="Enter subject here">
+                    </div>
+                    <div class="mb-3">
+                        <label for="emailBody" class="form-label">Email Body:</label>
+                        <textarea class="form-control" id="emailBody" rows="5" placeholder="Write your email here..."></textarea>
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="sendEmail()">Send Email</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        // Function to gather selected emails from the list
+        function getSelectedEmails() {
+            const selectedEmails = [];
+            document.querySelectorAll('.form-check-input:checked').forEach((checkbox) => {
+                const emailContent = checkbox.closest('.card-body').innerText;
+                selectedEmails.push(emailContent);
+            });
+            return selectedEmails;
+        }
+
+        // Function to initiate phishing detection when the button is clicked
+        async function checkForPhishing() {
+            const selectedEmails = getSelectedEmails();
+
+            if (selectedEmails.length === 0) {
+                alert('Please select at least one email to check.');
+                return;
+            }
+
+            // Temporary fake response for demonstration
+            const results = selectedEmails.map(() => Math.random() > 0.5 ? 'Phishing' : 'Legitimate');
+
+            // Update UI based on phishing detection results
+            document.querySelectorAll('.form-check-input:checked').forEach((checkbox, index) => {
+                const card = checkbox.closest('.card-body');
+                card.classList.remove('phishing', 'legitimate');
+                if (results[index] === 'Phishing') {
+                    card.classList.add('phishing');
+                } else {
+                    card.classList.add('legitimate');
+                }
+            });
+        }
+
+        // Function to gather data from the email composition form and send it to AI
+        async function sendEmail() {
+            // Gather form data
+            const fromEmail = document.getElementById("fromEmail").value;
+            const toEmail = document.getElementById("toEmail").value;
+            const subject = document.getElementById("subject").value;
+            const emailBody = document.getElementById("emailBody").value;
+
+            if (!fromEmail || !toEmail || !subject || !emailBody) {
+                alert("Please fill in all fields before sending the email.");
+                return;
+            }
+
+            const emailContent = `From: ${fromEmail}\nTo: ${toEmail}\nSubject: ${subject}\n\n${emailBody}`;
+
+            // Call the AI to check if the email is fraudulent
+            try {
+                // Temporary fake response for demonstration
+                const result = Math.random() > 0.5 ? 'Phishing' : 'Legitimate';
+
+                // Display result to the user
+                if (result === 'Phishing') {
+                    alert("Warning: This email has been classified as a phishing attempt.");
+                } else {
+                    alert("This email has been classified as legitimate.");
+                }
+
+            } catch (error) {
+                console.error('Error detecting phishing:', error);
+            }
+        }
+    </script>
+
+</body>
+</html>
