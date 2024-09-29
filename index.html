@@ -1,132 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Email System</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+	<head>
+		<title>BaitBlock</title>
+		
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<script type="javascript" src="js/script.js"> </script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+		
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+		<link type="favicons/x-icon" href="images/favicons/favicon.ico" rel="icon">
+		<link rel="stylesheet" href="styles.css">
+	</head>
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">My Email System</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Inbox</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Sent</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Spam</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Logout</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+	<body>
+		<!-- Navbar -->
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<div class="container-fluid">
+				<a id="logo" onclick="loadInbox()">
+					<img src="images/BaitBlockLogo.jpg" alt="Man in a boat catching a fish over an envelope with a blue circle stop sign with Bait above the envelope and Block below the envelope">
+				</a>
+				
+				<button class="navbar-toggler" type="button" onclick="switchLog(loginButton, logoutButton)"
+						data-bs-toggle="collapse" data-bs-target="#navbarTabs"
+						aria-controls="navbarTabs" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				
+				<div class="collapse navbar-collapse" id="navbarTabs">
+					<a class="nav-item" onclick="loadInbox()" id="navInbox">Inbox</a>
+					<a class="nav-item" onclick="loadSent()" id="navSent">Sent</a>
+					<a class="nav-item" onclick="loadPhish()" id="navPhish">Phish</a>
+					<a class="nav-item" onclick="loadTrash()" id="navTrash">Trash</a>
+					<a class="nav-item btn-primary" id="loginButton">Login</a>
+					<a class="nav-item btn-primary" id="logoutButton">Logout</a>
+				</div>
+			</div>
+		</nav>
+		
+		<!-- Main Content Area -->
+		<div class="container mt-4">
+			<div class="row">
+				<!-- Sidebar -->
+				<div class="col-md-3" id="sideBar">
+					<ul class="list-group" id="sidebarList">
+						<li class="list-group-item active" id="inboxTab">Inbox</li>
+						<li class="list-group-item" id="sentTab">Sent</li>
+						<li class="list-group-item" id="phishTab">Phish</li>
+						<li class="list-group-item" id="trashTab">Trash</li>
+					</ul>
+				</div>
+				<!-- Email List -->
+				<div class="col-md-9" id="inbox">
+					<h4>Inbox</h4>
+					<div class="card mb-3">
+						<div class="card-body">
+							<input class="form-check-input me-2" type="checkbox" id="email1">
+							<label for="email1" class="form-check-label">
+								<strong>Subject:</strong> You have won a prize! <br>
+								<strong>From:</strong> lottery@fakesite.com <br>
+								Congratulations! Click the link to claim your reward...
+							</label>
+						</div>
+					</div>
+					<div class="card mb-3">
+						<div class="card-body">
+							<input class="form-check-input me-2" type="checkbox" id="email2">
+							<label for="email2" class="form-check-label">
+								<strong>Subject:</strong> Meeting Reminder <br>
+								<strong>From:</strong> boss@company.com <br>
+								Please confirm your availability for the team meeting at 10 AM tomorrow.
+							</label>
+						</div>
+					</div>
+					<!-- Action Button -->
+					<button class="btn btn-primary mt-3" onclick="checkForPhishing()">Check for Phishing</button>
+				</div>
+			</div>
 
-    <!-- Main Content Area -->
-    <div class="container mt-4">
-        <div class="row">
-            <!-- Sidebar -->
-            <div class="col-md-3">
-                <ul class="list-group">
-                    <li class="list-group-item active">Inbox</li>
-                    <li class="list-group-item">Sent</li>
-                    <li class="list-group-item">Spam</li>
-                    <li class="list-group-item">Trash</li>
-                </ul>
-            </div>
-            <!-- Email List -->
-            <div class="col-md-9">
-                <h4>Inbox</h4>
-                <div id="inbox-container">
-                    <!-- Emails will be dynamically added here by JavaScript -->
-                </div>
-                <!-- Action Button -->
-                <button class="btn btn-primary mt-3" onclick="checkForPhishing()">Check for Phishing</button>
-            </div>
-        </div>
+			<!-- Email Composition Form -->
+			<div class="row mt-5">
+				<div class="col-md-12">
+					<h4>Compose Email</h4>
+					<form id="composeEmailForm">
+						<div class="mb-3">
+							<label for="fromEmail" class="form-label">From:</label>
+							<input type="email" class="form-control" id="fromEmail" placeholder="your.email@example.com">
+						</div>
+						<div class="mb-3">
+							<label for="toEmail" class="form-label">To:</label>
+							<input type="email" class="form-control" id="toEmail" placeholder="recipient@example.com">
+						</div>
+						<div class="mb-3">
+							<label for="subject" class="form-label">Subject:</label>
+							<input type="text" class="form-control" id="subject" placeholder="Enter subject here">
+						</div>
+						<div class="mb-3">
+							<label for="emailBody" class="form-label">Email Body:</label>
+							<textarea class="form-control" id="emailBody" rows="5"
+								placeholder="Write your email here..."></textarea>
+						</div>
+						<button type="button" class="btn btn-primary" onclick="sendEmail()">Send Email</button>
+					</form>
+				</div>
+			</div>
+		</div>
 
-        <!-- Email Composition Form -->
-        <div class="row mt-5">
-            <div class="col-md-12">
-                <h4>Compose Email</h4>
-                <form id="composeEmailForm">
-                    <div class="mb-3">
-                        <label for="fromEmail" class="form-label">From:</label>
-                        <input type="email" class="form-control" id="fromEmail" placeholder="your.email@example.com">
-                    </div>
-                    <div class="mb-3">
-                        <label for="toEmail" class="form-label">To:</label>
-                        <input type="email" class="form-control" id="toEmail" placeholder="recipient@example.com">
-                    </div>
-                    <div class="mb-3">
-                        <label for="subject" class="form-label">Subject:</label>
-                        <input type="text" class="form-control" id="subject" placeholder="Enter subject here">
-                    </div>
-                    <div class="mb-3">
-                        <label for="emailBody" class="form-label">Email Body:</label>
-                        <textarea class="form-control" id="emailBody" rows="5" placeholder="Write your email here..."></textarea>
-                    </div>
-                    <button type="button" class="btn btn-primary" onclick="sendEmail()">Send Email</button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Bootstrap JavaScript Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Custom JavaScript -->
-    <script src="script.js"></script>
-    <script>
-        // Function to dynamically load emails into the inbox
-        async function loadInbox() {
-            try {
-                // Fetch emails from the backend
-                const response = await fetch('http://127.0.0.1:5000/get-emails');
-                const emails = await response.json();
-
-                // Container where the emails will be displayed
-                const inboxContainer = document.getElementById('inbox-container');
-                inboxContainer.innerHTML = ''; // Clear the inbox before adding new emails
-
-                // Loop through the emails and create cards for each email
-                emails.forEach((email, index) => {
-                    const emailCard = document.createElement('div');
-                    emailCard.className = 'card mb-3';
-                    emailCard.innerHTML = `
-                        <div class="card-body">
-                            <input class="form-check-input me-2" type="checkbox" id="email${index}">
-                            <label for="email${index}" class="form-check-label">
-                                <strong>Subject:</strong> ${email.subject} <br>
-                                <strong>From:</strong> ${email.fromEmail} <br>
-                                <strong>Time:</strong> ${email.timestamp} <br>
-                                ${email.emailBody}
-                            </label>
-                        </div>
-                    `;
-                    inboxContainer.appendChild(emailCard);
-                });
-
-            } catch (error) {
-                console.error('Error loading inbox:', error);
-            }
-        }
-
-        // Call the loadInbox function when the page loads
-        document.addEventListener('DOMContentLoaded', loadInbox);
-    </script>
-</body>
+		<!-- Login Modal -->
+		<div id="loginModal" class="modal">
+			<div class="modal-content">
+				<span class="close-button">&times;</span>
+				<h2>Login</h2>
+				<form id="loginForm">
+					<div class="mb-3">
+						<label for="username" class="form-label">Username:</label>
+						<input type="text" class="form-control" id="username" required>
+					</div>
+					<div class="mb-3">
+						<label for="password" class="form-label">Password:</label>
+						<input type="password" class="form-control" id="password" required>
+					</div>
+					<button type="button" class="btn btn-primary" onclick="handleLogin()">Login</button>
+				</form>
+			</div>
+		</div>
+	</body>
 </html>

@@ -1,80 +1,165 @@
 /* General Styles */
-body {
+body 
+{
     font-family: 'Arial, sans-serif';
     background-color: #f8f9fa;
     color: #343a40;
 }
 
 /* Navbar Styles */
-.navbar {
+.navbar 
+{
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-bottom: 2px solid #e3e6ea;
+	margin: 0;
+	padding: 0;
+	height: 130px;
+	overflow: auto;
+	background-color: #f1f1f1;
+	width: 100%;
 }
 
-.navbar-brand {
+.navbar-brand 
+{
+	border-radius: 5px;
+	font-size: 30px;
     font-weight: bold;
     color: #007bff !important;
 }
 
+.nav-item
+{
+	margin-right: 20px;
+	font-size: 20px;
+	border-radius: 5px;
+}
+
+.navbar a 
+{
+	color: black;
+	padding: 10px;
+	text-decoration: none;
+}
+ 
+.navbar a.active 
+{
+	background-color: #007bff;
+	color: white;
+}
+
+.navbar a:hover:not(.active) 
+{
+	transition: 0.3s;
+	background-color: #555;
+	color: white;
+}
+
+#loginButton
+{
+	float: right;
+	height: 50px;
+	width: 75px;
+	text-align: center;
+	margin-right: 20px;
+}
+
+#logoutButton
+{
+	float: right;
+	height: 50px;
+	width: 75px;
+	text-align: center;
+	margin-right: 20px;
+}
+
 /* Sidebar Styles */
-.sidebar {
+.sidebar 
+{
     background-color: #ffffff;
     border-right: 1px solid #e3e6ea;
     padding-top: 20px;
     min-height: 100vh;
 }
 
-.list-group-item {
+.list-group-item 
+{
     border: none;
-    border-bottom: 1px solid #e3e6ea;
+    border-bottom: 2px solid #e3e6ea;
 }
 
-.list-group-item.active {
+.list-group-item.active 
+{
     background-color: #007bff;
     border-color: #007bff;
     color: #ffffff;
 }
 
 /* Email Card Styles */
-.card {
+.card 
+{
     transition: all 0.3s ease-in-out;
     cursor: pointer;
 }
 
-.card:hover {
+.card:hover 
+{
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     transform: translateY(-3px);
 }
 
-.card-body {
+.card-body 
+{
     background-color: #ffffff;
     border: 1px solid #e3e6ea;
     border-radius: 10px;
     padding: 15px;
 }
 
-.form-check-input {
+.form-check-input 
+{
     margin-top: 0.3rem;
 }
 
+.email-form input, .email-form textarea 
+{
+    width: calc(100% - 20px);
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.email-item 
+{
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
 /* Button Styles */
-.btn-primary {
+.btn-primary 
+{
     background-color: #007bff;
     border: none;
+	border-radius: 4px;
     transition: all 0.2s ease-in-out;
 }
 
-.btn-primary:hover {
+.btn-primary:hover 
+{
     background-color: #0056b3;
 }
 
 /* Customizations for Phishing Result */
-.phishing {
+.phishing 
+{
     background-color: #ffdddd !important;
     border-left: 5px solid #e74c3c !important;
 }
 
-.legitimate {
+.legitimate 
+{
     background-color: #ddffdd !important;
     border-left: 5px solid #28a745 !important;
 }
