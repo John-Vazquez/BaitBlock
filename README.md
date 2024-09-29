@@ -1,11 +1,11 @@
 # BaitBlock - Shellhacks 2024 Project
 
-##Project Overview
+## Project Overview
 
 BaitBlock is a web application designed to detect and flag phishing emails, providing users with a robust defense against online scams. By leveraging advanced algorithms and the ChatGPT API, BaitBlock analyzes the content, context, and structure of emails to identify potentially malicious messages. Its primary goal is to protect users from falling victim to phishing attempts by detecting and flagging suspicious emails in real time, thereby safeguarding personal, financial, and organizational data.
 
 
-##Key Features
+## Key Features
 
 
 **Email Phishing Detection:** BaitBlock uses the ChatGPT API to analyze the language and context of incoming emails, identifying phishing attempts through subtle indicators such as unusual requests, deceptive language, or suspicious links and attachments.
@@ -18,7 +18,7 @@ BaitBlock is a web application designed to detect and flag phishing emails, prov
 
 
 
-##Future Aims
+## Future Aims
 
 
 **Real-Time Flagging and Alerts:** When a suspicious email is detected, BaitBlock flags it and sends an immediate alert to the user, providing details on why the email was flagged and advising on safe handling practices.
