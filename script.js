@@ -65,7 +65,6 @@ async function loadInbox() {
         const emails = await response.json();
         console.log("Fetched Emails:", emails); // Add this line to see the data in the console
 
-
         // Container where the emails will be displayed
         const inboxContainer = document.querySelector('.col-md-9');
         inboxContainer.innerHTML = '<h4>Inbox</h4>';
@@ -84,6 +83,7 @@ async function loadInbox() {
                         <strong>Time:</strong> ${email.timestamp} <br>
                         ${email.emailBody}
                     </label>
+                    <button class="btn btn-danger btn-sm float-end" onclick="deleteEmail(${index})">Delete</button>
                 </div>
             `;
             inboxContainer.appendChild(emailCard);
@@ -93,6 +93,29 @@ async function loadInbox() {
         console.error("Error loading inbox:", error);
     }
 }
+
+async function deleteEmail(emailId) {
+    console.log('Delete button clicked for email ID:', emailId); // Debugging line
+
+    try {
+        const response = await fetch(`http://127.0.0.1:5000/delete-email/${emailId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (response.ok) {
+            alert('Email deleted successfully!');
+            loadInbox(); // Reload the inbox to reflect the changes
+        } else {
+            alert('Failed to delete email.');
+        }
+    } catch (error) {
+        console.error('Error deleting email:', error);
+    }
+}
+
 
 // Call the loadInbox function when the page loads
 document.addEventListener('DOMContentLoaded', loadInbox);
