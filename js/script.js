@@ -1,5 +1,22 @@
+// Call the loadInbox function when the page loads
 document.addEventListener('DOMContentLoaded', loadInbox);
 
+function changeSidebarItem(oldItem, newItem)
+{
+	oldItem.classList.remove("active");
+	newItem.classList.add("active");
+}
+
+function switchLog(id1, id2)
+{
+	console.log("hi");
+	let name = id1.value;
+	let click = id1.onclick;
+	id1.value = id2.value;
+	id1.onclick = id2.onclick;
+	id2.value = name;
+	id2.onclick = click;
+}
 
 // Function to gather selected emails from the list
 function getSelectedEmails() {
@@ -9,6 +26,66 @@ function getSelectedEmails() {
         selectedEmails.push(emailContent);
     });
     return selectedEmails;
+}
+
+function sendEmail() 
+{
+    const sender = document.getElementById('sender').value;
+    const recipient = document.getElementById('recipient').value;
+    const subject = document.getElementById('subject').value;
+    const body = document.getElementById('body').value;
+
+    const response = await fetch('/api/emails/send', 
+	{
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sender, recipient, subject, body })
+    });
+	
+    const result = await response.json();
+    if (response.ok) 
+	{
+        alert('Email sent!');
+        loadInbox();
+    } else {
+        alert('Error sending email: ' + result.error);
+    }
+}
+
+async function loadInbox() {
+    try {
+        // Fetch emails from the backend
+        const response = await fetch('http://127.0.0.1:5000/get-emails');
+        const emails = await response.json();
+        console.log("Fetched Emails:", emails); // Add this line to see the data in the console
+
+
+        // Container where the emails will be displayed
+        const inboxContainer = document.querySelector('.col-md-9');
+        inboxContainer.innerHTML = '<h4>Inbox</h4>';
+
+        // Loop through the emails and create cards for each email
+        emails.forEach((email, index) => {
+            const emailCard = document.createElement('div');
+            emailCard.className = 'card mb-3';
+            emailCard.innerHTML = `
+                <div class="card-body">
+                    <input class="form-check-input me-2" type="checkbox" id="email${index}">
+                    <label for="email${index}" class="form-check-label">
+                        <strong>Subject:</strong> ${email.subject} <br>
+                        <strong>From:</strong> ${email.fromEmail} <br>
+                        <strong>To:</strong> ${email.toEmail} <br>
+                        <strong>Time:</strong> ${email.timestamp} <br>
+                        ${email.emailBody}
+                    </label>
+                </div>
+            `;
+            inboxContainer.appendChild(emailCard);
+        });
+
+    } catch (error) {
+        console.error("Error loading inbox:", error);
+    }
 }
 
 // Function to initiate phishing detection when the button is clicked
@@ -55,45 +132,6 @@ async function checkForPhishing() {
     }
 }
 
-// Attach event listener to the "Check for Phishing" button
-document.querySelector('button.btn-primary').addEventListener('click', checkForPhishing);
-
-async function loadInbox() {
-    try {
-        // Fetch emails from the backend
-        const response = await fetch('http://127.0.0.1:5000/get-emails');
-        const emails = await response.json();
-        console.log("Fetched Emails:", emails); // Add this line to see the data in the console
-
-        // Container where the emails will be displayed
-        const inboxContainer = document.querySelector('.col-md-9');
-        inboxContainer.innerHTML = '<h4>Inbox</h4>';
-
-        // Loop through the emails and create cards for each email
-        emails.forEach((email, index) => {
-            const emailCard = document.createElement('div');
-            emailCard.className = 'card mb-3';
-            emailCard.innerHTML = `
-                <div class="card-body">
-                    <input class="form-check-input me-2" type="checkbox" id="email${index}">
-                    <label for="email${index}" class="form-check-label">
-                        <strong>Subject:</strong> ${email.subject} <br>
-                        <strong>From:</strong> ${email.fromEmail} <br>
-                        <strong>To:</strong> ${email.toEmail} <br>
-                        <strong>Time:</strong> ${email.timestamp} <br>
-                        ${email.emailBody}
-                    </label>
-                    <button class="btn btn-danger btn-sm float-end" onclick="deleteEmail(${index})">Delete</button>
-                </div>
-            `;
-            inboxContainer.appendChild(emailCard);
-        });
-
-    } catch (error) {
-        console.error("Error loading inbox:", error);
-    }
-}
-
 async function deleteEmail(emailId) {
     console.log('Delete button clicked for email ID:', emailId); // Debugging line
 
@@ -115,7 +153,3 @@ async function deleteEmail(emailId) {
         console.error('Error deleting email:', error);
     }
 }
-
-
-// Call the loadInbox function when the page loads
-document.addEventListener('DOMContentLoaded', loadInbox);
