@@ -27,16 +27,7 @@ BaitBlock is a web application designed to detect and flag phishing emails, prov
 
 **Enhanced AI and Contextual Detection:** BaitBlock plans to further develop its use of the ChatGPT API and other natural language processing (NLP) tools to detect increasingly sophisticated phishing techniques, such as personalized scams targeting specific individuals or organizations.
 
-**Multilingual Email Analysis:** As phishing threats are global, BaitBlock aims to support multilingual email analysis, enabling it to detect scams written in various languages, dialects, and regional communication styles.
-
 **Integration with Enterprise Security Systems:** BaitBlock seeks to expand its capabilities to enterprise environments, offering integration with corporate email security systems and providing detailed analytics on phishing threats targeting organizations.
 
 **Advanced Machine Learning Feedback Loops:** Future iterations will include feedback loops where user interactions with flagged emails inform and improve BaitBlock’s detection algorithms, enhancing accuracy over time.
 
-**Training Modules for Phishing Awareness:** BaitBlock aims to develop interactive training modules that simulate real-world phishing scenarios, educating users on how to identify phishing emails independently, even when automated tools are not available.
-
-**Phishing Threat Intelligence Sharing:** BaitBlock plans to collaborate with cybersecurity platforms to share data on new phishing threats, helping to build a more comprehensive global response to email-based scams.
-
-**AI-Driven Email Scoring System:** BaitBlock will develop a scoring system that assigns risk levels to incoming emails, helping users quickly gauge the safety of messages and decide on appropriate actions.
-
-**Protection for Communication Platforms:** Future versions aim to extend BaitBlock’s phishing detection capabilities beyond traditional email to other communication platforms, such as messaging apps and social media, where phishing attempts are also prevalent.
