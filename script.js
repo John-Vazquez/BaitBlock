@@ -1,4 +1,5 @@
-alert("JavaScript is connected!");
+document.addEventListener('DOMContentLoaded', loadInbox);
+
 
 // Function to gather selected emails from the list
 function getSelectedEmails() {
