@@ -10,7 +10,45 @@ function getSelectedEmails() {
     });
     return selectedEmails;
 }
+//UPDATED PHISHING DETECTION FUNCTION
+async function checkForPhishing() {
+    const selectedEmails = getSelectedEmails();
+    
+    if (selectedEmails.length === 0) {
+        alert('Please select at least one email to check.');
+        return;
+    }
 
+    try {
+        const response = await fetch('http://127.0.0.1:5000/check-phishing', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ emails: selectedEmails })
+        });
+
+        const data = await response.json();
+        const results = data.results; // This will have the phishing detection results
+
+        // Update UI based on phishing detection results
+        document.querySelectorAll('.form-check-input:checked').forEach((checkbox, index) => {
+            const card = checkbox.closest('.card-body');
+            card.classList.remove('phishing', 'legitimate');
+            if (results[index] === 'Phishing') {
+                card.classList.add('phishing');
+            } else {
+                card.classList.add('legitimate');
+            }
+        });
+
+    } catch (error) {
+        console.error('Error checking emails:', error);
+    }
+}
+
+
+/*
 // Function to initiate phishing detection when the button is clicked
 async function checkForPhishing() {
     const selectedEmails = getSelectedEmails();
@@ -37,10 +75,10 @@ async function checkForPhishing() {
         */
 
         // Temporary fake response for demonstration
-        const results = selectedEmails.map(() => Math.random() > 0.5 ? 'Phishing' : 'Legitimate');
+        //const results = selectedEmails.map(() => Math.random() > 0.5 ? 'Phishing' : 'Legitimate');
 
         // Update UI based on phishing detection results
-        document.querySelectorAll('.form-check-input:checked').forEach((checkbox, index) => {
+        /*document.querySelectorAll('.form-check-input:checked').forEach((checkbox, index) => {
             const card = checkbox.closest('.card-body');
             card.classList.remove('phishing', 'legitimate');
             if (results[index] === 'Phishing') {
@@ -53,7 +91,7 @@ async function checkForPhishing() {
     } catch (error) {
         console.error('Error checking emails:', error);
     }
-}
+}*/
 
 // Attach event listener to the "Check for Phishing" button
 document.querySelector('button.btn-primary').addEventListener('click', checkForPhishing);
