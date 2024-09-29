@@ -15,16 +15,14 @@ BaitBlock is a web application designed to detect and flag phishing emails, prov
 
 **Advanced Threat Intelligence:** By continuously learning from flagged emails, BaitBlock enhances its detection capabilities, adapting to new phishing tactics and evolving threats.
 
-***User-Friendly Dashboard:** BaitBlock offers a user-friendly interface where users can review flagged emails.
+**User-Friendly Dashboard:** BaitBlock offers a user-friendly interface where users can review flagged emails.
 
 
 
-**Future Aims**
+##[**Future Aims**]
 
 
 **Real-Time Flagging and Alerts:** When a suspicious email is detected, BaitBlock flags it and sends an immediate alert to the user, providing details on why the email was flagged and advising on safe handling practices.
-
-***User-Friendly Dashboard:** BaitBlock offers a user-friendly interface where users can review flagged emails, see detailed reports on why an email was identified as a threat, and customize detection sensitivity settings.
 
 **Protection Across Platforms:** BaitBlock integrates with popular email clients (e.g., Gmail, Outlook) and works seamlessly across desktop and mobile devices, ensuring consistent protection regardless of where users access their emails.
 
