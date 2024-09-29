@@ -1,5 +1,5 @@
+// Call the loadInbox function when the page loads
 document.addEventListener('DOMContentLoaded', loadInbox);
-
 
 // Function to gather selected emails from the list
 function getSelectedEmails() {
@@ -94,5 +94,24 @@ async function loadInbox() {
     }
 }
 
-// Call the loadInbox function when the page loads
-document.addEventListener('DOMContentLoaded', loadInbox);
+async function deleteEmail(emailId) {
+    console.log('Delete button clicked for email ID:', emailId); // Debugging line
+
+    try {
+        const response = await fetch(`http://127.0.0.1:5000/delete-email/${emailId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (response.ok) {
+            alert('Email deleted successfully!');
+            loadInbox(); // Reload the inbox to reflect the changes
+        } else {
+            alert('Failed to delete email.');
+        }
+    } catch (error) {
+        console.error('Error deleting email:', error);
+    }
+}
