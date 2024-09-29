@@ -1,4 +1,4 @@
-# BaitBlock - Shellhacks 2024 Project <img src="https://github.com/John-Vazquez/BaitBlock/blob/main/Bait%20block.jpg" alt="BaitBlock" width="100" />
+# BaitBlock - Shellhacks 2024 Project             <img src="https://github.com/John-Vazquez/BaitBlock/blob/main/Bait%20block.jpg" alt="BaitBlock" width="170" />
 
 
 ## Project Overview
