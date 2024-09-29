@@ -1,5 +1,5 @@
 # BaitBlock
-# Shellhacks 2024 Project
+## Shellhacks 2024 Project
 
 **Project Overview**
 
@@ -19,7 +19,7 @@ BaitBlock is a web application designed to detect and flag phishing emails, prov
 
 
 
-##[**Future Aims**]
+**Future Aims**
 
 
 **Real-Time Flagging and Alerts:** When a suspicious email is detected, BaitBlock flags it and sends an immediate alert to the user, providing details on why the email was flagged and advising on safe handling practices.
